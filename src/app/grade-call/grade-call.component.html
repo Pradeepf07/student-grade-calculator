@@ -1,0 +1,152 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center;margin-top: 3%;margin-bottom: 0px">
+    <h2>
+      Welcome to Student Grade Calculator !
+    </h2>
+  <p style="margin-left: 30%;margin-right: 30%">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius molestias deserunt repellendus corrupti hic veniam dolores!</p>
+</div>
+
+<div [hidden]="viHint">
+    <div style="text-align:center;margin-bottom: 3%">
+    <img width="100"  alt="Angular Logo" src="../assets/student.gif">
+    </div>
+
+    <form  (ngSubmit)="submitData(object)" #object="ngForm" name="myForm" >
+    <div class="container" style="margin-bottom: 20px">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" class="form-control" name="sname" ngModel required="required" #namecontrol="ngModel">
+                    <span *ngIf="namecontrol.invalid" style="color: red">** student name is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="pwd">Register Number</label>
+                    <input type="number" class="form-control" name="srnumber" ngModel  required="required" #numcontrol="ngModel">
+                    <span *ngIf="numcontrol.invalid" style="color: red">** student register number is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="pwd">College Name</label>
+                    <input type="text" class="form-control" name="scollname" ngModel required="required" #collegecontroller = "ngModel">
+                    <span *ngIf="collegecontroller.invalid" style="color: red">** student college name required</span>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="row">
+
+                    <div class="form-group col-md-6">
+                        <label>First Subject Name</label>
+                        <input type="text" class="form-control" name="fsubname" ngModel required="required" #fsubname = "ngModel">
+                        <span *ngIf="fsubname.invalid" style="color: red">** subject name is required</span>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Mark Optained</label>
+                        <input type="number" class="form-control" name="fsubmoptained" ngModel required="required" #fmarkopt="ngModel">
+                        <span *ngIf="fmarkopt.invalid" style="color: red">** field is required</span>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Total Mark</label>
+                        <input type="number" class="form-control" name="fsubtmark" ngModel required="required" #ftomark="ngModel">
+                        <span *ngIf="ftomark.invalid" style="color: red">** field is required</span><br>
+                        <span *ngIf="fmarkopt.value > ftomark.value && ftomark.valid" style="color: red">**less than optained</span>
+                    </div>
+            
+                    <div class="form-group col-md-6">
+                        <label>Second Subject Name</label>
+                        <input type="text" class="form-control" name="ssubname" ngModel required="required" #ssubname="ngModel">
+                        <span *ngIf="ssubname.invalid" style="color: red">** subject name is required</span>
+                    </div>
+        
+                    <div class="form-group col-md-3">
+                        <label>Mark Optained</label>
+                        <input type="number" class="form-control" name="ssubmoptained" ngModel required="required" #smarkopt="ngModel">
+                        <span *ngIf="smarkopt.invalid" style="color: red">** field is required</span>
+                    </div>
+        
+                    <div class="form-group col-md-3">
+                        <label>Total Mark</label>
+                        <input type="number" class="form-control" name="ssubtmark" ngModel required="required" #stomark="ngModel">
+                        <span *ngIf="stomark.invalid" style="color: red">** field is required</span><br>
+                        <span *ngIf="smarkopt.value > stomark.value && stomark.valid" style="color: red">**less than optained</span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Third Subject Name</label>
+                        <input type="text" class="form-control" name="tsubname" ngModel required="required" #tsubname="ngModel">
+                        <span *ngIf="tsubname.invalid" style="color: red">** subject name is required</span>
+                    </div>
+        
+                    <div class="form-group col-md-3">
+                        <label>Mark Optained</label>
+                        <input type="number" class="form-control" name="tsubmoptained" ngModel required="required" #tmarkopt="ngModel">
+                        <span *ngIf="tmarkopt.invalid" style="color: red">** field is required</span>
+                    </div>
+        
+                    <div class="form-group col-md-3">
+                        <label>Total Mark</label>
+                        <input type="number" class="form-control" name="tsubtmark" ngModel required="required" #ttomark="ngModel">
+                        <span *ngIf="ttomark.invalid" style="color: red">** field is required</span><br>
+                        <span *ngIf="tmarkopt.value > ttomark.value && ttomark.valid" style="color: red">**less than optained</span>
+                    </div>
+
+                
+                </div>
+            
+            </div>
+            <div class="form-group col-md-12" style="text-align: right;margin-top: .8%">
+                    <button type="submit" [disabled]="object.invalid" class="btn btn-info">Calculate your marks Grade</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div [hidden]="!viHint" class="container">
+    <div style="text-align:center;margin-bottom: 1%">
+        <div [hidden]="fOnHint">
+            <span style="color: red;font-size: 18px">Sorry {{sname}} , you are Failed in exam</span>
+        </div>
+        <div [hidden]="!fOnHint">
+            <span style="color: green; font-size: 18px">Congratulations {{sname}} , you are pass the exam</span>
+        </div>
+
+        <img width="25%"  [src]="imagePath">
+    </div>
+    <div>
+        <h6>
+            <span style="margin-right: 40%">{{sRegNum}}</span>
+            <span style="margin-right: 10%">{{sName}}</span>
+            <span style="float: right;">{{sCollege}}</span>
+        </h6>
+    </div>
+
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Subject Name</th>
+                    <th scope="col">Mark Optained</th>
+                    <th scope="col">Total Mark</th>
+                    <th scope="col">Percentage</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of studentData">
+                    <th >{{item.subjectName}}</th>
+                    <th >{{item.subjectMark}}</th>
+                    <th >{{item.subjectTmark}}</th>
+                    <th >{{item.subjectPercentage}}%</th>
+                    <th >{{item.grade}}</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+  
+
